@@ -151,7 +151,7 @@ async function refreshWallet() {
 function disconnect(silent = false) {
   wallet = null;
   localStorage.removeItem('hf_rabby_connected');
-  $('connectLabel').textContent = 'Connect MetaMask';
+  $('connectLabel').textContent = 'Connect Phantom';
   const hc = $('heroConnect'), hd = $('heroDash');
   if (hc && hd) { hc.hidden = false; hd.hidden = true; }
   window.dispatchEvent(new Event('hf-wallet')); // let portfolio/console re-hide
@@ -658,13 +658,13 @@ async function refreshStaking() {
       $('spYourStake').textContent = '—';
       $('spPending').textContent = '—';
       $('spWalletBal').textContent = '—';
-      $('spNote').textContent = 'Connect MetaMask to stake.';
+      $('spNote').textContent = 'Connect Phantom to stake.';
     }
   } catch (e) { /* transient RPC hiccup — next poll retries */ }
 }
 
 async function stakingTx(data, label) {
-  if (!wallet?.account) { toast('Connect MetaMask first.', true); return null; }
+  if (!wallet?.account) { toast('Connect Phantom first.', true); return null; }
   const chainId = await wallet.provider.request({ method: 'eth_chainId' });
   if (chainId.toLowerCase() !== CHAIN.chainId) {
     toast('Switching to Solana…');
