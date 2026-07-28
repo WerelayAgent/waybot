@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Waybot Agent — an AI agent that invests for you on Solana</title>
+<meta name="description" content="Waybot Agent ($WAYBOT) — an AI agent that invests for you in Pump.fun memecoins on Solana. You set the route; the agent buys inside it, from a non-custodial vault it cannot withdraw from.">
+<link rel="icon" type="image/svg+xml" href="assets/logo.png">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="css/style.css?v=1785216049">
+</head>
+<body class="home">
+
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top">
+      <img src="assets/logo.png" alt="Waybot Agent" class="brand-bolt">
+      <span class="brand-word">waybot</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#product">Product</a>
+      <a href="#agents">Agent</a>
+      <a href="#token">Token</a>
+      <a href="#chain">Chain</a>
+      <a href="#arch">Architecture</a>
+    </nav>
+    <div class="nav-right">
+    <a href="https://x.com/waybotagent" target="_blank" class="btn btn-ghost btn-connect">    
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+    </a>
+      
+      <a class="btn btn-signal btn-sm btn-buy" href="https://flap.sh/solana/coming soon on pump.fun" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        Buy $WAYBOT
+      </a>
+      <button class="btn btn-ghost btn-connect" id="connectBtn">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg>
+        <span id="connectLabel">Connect MetaMask</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<main id="top">
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <h1 class="reveal d1"><span class="signal">An AI agent that</span><br>trades for you.</h1>
+      <p class="hero-sub reveal d2">You set the route. The agent decides when and how much to buy inside it, around the clock — from a vault it <b>can never withdraw from</b>.</p>
+      <p class="hero-motto reveal d2">Every step, marked.</p>
+      <div class="hero-cta reveal d3">
+        <button class="btn btn-signal btn-lg" id="heroConnect">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" class="rabby-mini"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg>
+          Connect MetaMask
+        </button>
+        <a class="btn btn-signal btn-lg btn-dash" id="heroDash" href="/app" hidden>
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="2"/><rect x="14" y="3" width="7" height="5" rx="2"/><rect x="14" y="12" width="7" height="9" rx="2"/><rect x="3" y="16" width="7" height="5" rx="2"/></svg>
+          Launch dashboard →
+        </a>
+        <button class="btn btn-ghost btn-lg" id="addChainBtn">+ Add Solana</button>
+      </div>
+    </div>
+    <div class="hero-visual reveal d2">
+      <div class="phone">
+        <div class="phone-head">
+          <img src="assets/logo.png" alt="" class="phone-bolt">
+          <span>Autopilot</span>
+          <span class="phone-live"><span class="pulse-dot"></span> live · 24/7</span>
+        </div>
+        <div class="phone-chart">
+          <svg id="phoneChart" viewBox="0 0 300 130" preserveAspectRatio="none"></svg>
+        </div>
+        <div class="phone-feed" id="phoneFeed"></div>
+      </div>
+      <div class="float-chip fc1"><svg viewBox="0 0 24 24" fill="#F2E58C" aria-label="WIF"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>round-up +$0.73</div>
+      <div class="float-chip fc2"><svg viewBox="0 0 24 24" fill="#E8D44D" aria-label="POPCAT"><path d="M8.948 8.798v-1.43a6.7 6.7 0 0 1 .424-.018c3.922-.124 6.493 3.374 6.493 3.374s-2.774 3.851-5.75 3.851c-.398 0-.787-.062-1.158-.185v-4.346c1.528.185 1.837.857 2.747 2.385l2.04-1.714s-1.492-1.952-4-1.952a6.016 6.016 0 0 0-.796.035m0-4.735v2.138l.424-.027c5.45-.185 9.01 4.47 9.01 4.47s-4.08 4.964-8.33 4.964c-.37 0-.733-.035-1.095-.097v1.325c.3.035.61.062.91.062 3.957 0 6.82-2.023 9.593-4.408.459.371 2.34 1.263 2.73 1.652-2.633 2.208-8.772 3.984-12.253 3.984-.335 0-.653-.018-.971-.053v1.864H24V4.063zm0 10.326v1.131c-3.657-.654-4.673-4.46-4.673-4.46s1.758-1.944 4.673-2.262v1.237H8.94c-1.528-.186-2.73 1.245-2.73 1.245s.68 2.412 2.739 3.11M2.456 10.9s2.164-3.197 6.5-3.533V6.201C4.153 6.59 0 10.653 0 10.653s2.35 6.802 8.948 7.42v-1.237c-4.84-.6-6.492-5.936-6.492-5.936z"/></svg>DCA $50 / week</div>
+      <div class="float-chip fc3"><svg viewBox="0 0 24 24" fill="#F2E58C" aria-label="BONK"><path d="M12 5.362l2.475-3.026s4.245.09 8.471 2.054c-1.082 1.636-3.231 2.438-3.231 2.438-.146-1.439-1.154-1.79-4.354-1.79L12 24 8.619 5.034c-3.18 0-4.188.354-4.335 1.792 0 0-2.146-.795-3.229-2.43C5.28 2.431 9.525 2.34 9.525 2.34L12 5.362l-.004.002H12v-.002zm0-3.899c3.415-.03 7.326.528 11.328 2.28.535-.968.672-1.395.672-1.395C19.625.612 15.528.015 12 0 8.472.015 4.375.61 0 2.349c0 0 .195.525.672 1.396C4.674 1.989 8.585 1.435 12 1.46v.003z"/></svg>dip −3% → buy</div>
+    </div>
+  </div>
+
+  <!-- ticker -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
+</section>
+
+
+<!-- ============ ABOUT ============ -->
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="kicker reveal">About</div>
+    <h2 class="reveal">Automated investing,<br>without <span class="signal">giving up custody</span></h2>
+    <p class="section-sub reveal">Waybot Agent buys Pump.fun memecoins for you on Solana. You define the route — goal, risk, assets, budget, limits — and the agent works inside that frame around the clock: sweeping round-ups, running DCA without skips, sizing dip-buys to the drawdown, holding baskets at weight.</p>
+    <p class="section-sub reveal d1">It runs against a vault you own. The limits are written into a contract rather than promised in a policy, and every decision it makes is <b>a transaction you can audit</b>.</p>
+  </div>
+</section>
+
+<!-- ============ PROBLEM ============ -->
+<section class="section" id="problem">
+  <div class="wrap">
+    <div class="kicker reveal">01 · Problem</div>
+    <h2 class="reveal">Nobody wants to<br>run the rules <span class="signal">by hand</span></h2>
+    <div class="problem-grid">
+      <div class="p-card old reveal">
+        <div class="p-head">Doing it yourself</div>
+        <div class="p-clock mono">9:30 — 16:00</div>
+        <ul>
+          <li>Weekdays only. The rest is waiting</li>
+          <li>The overnight dip happens while you sleep</li>
+          <li>Automation stops at “buy on the Nth”</li>
+          <li>Tuning it is a second job</li>
+        </ul>
+        <div class="p-bar"><i style="--w:19%"></i><span>you, awake ~19% of the week</span></div>
+      </div>
+      <div class="p-card new reveal d1">
+        <div class="p-head"><img src="assets/svg/solana.svg" alt="">With an agent</div>
+        <div class="p-clock mono signal">24 / 7 / 365</div>
+        <ul>
+          <li>Never closes, never skips a leg</li>
+          <li>Reacts to the market, not to a calendar</li>
+          <li>Sizes each buy by how deep the dip is</li>
+          <li>Limits live in the contract, not in trust</li>
+        </ul>
+        <div class="p-bar"><i class="full" style="--w:100%"></i><span>the agent, awake 100% of the time</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRODUCT ============ -->
+<section class="section" id="product">
+  <div class="wrap">
+    <div class="kicker reveal">02 · Product</div>
+    <h2 class="reveal">Four scenarios,<br>run by <span class="signal">the agent</span></h2>
+    <p class="section-sub reveal">Each one comes down to buying Pump.fun memecoins for you — the agent picks the moment and the size inside your route.</p>
+    <div class="cards4">
+      <div class="f-card reveal">
+        <div class="f-ico">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="24" cy="24" r="16" opacity=".35"/><path d="M24 8a16 16 0 0 1 16 16" class="draw"/><path d="M18 24h12M24 18v12" /></svg>
+        </div>
+        <h3>Round-ups</h3>
+        <p>Spare change from everything you spend, swept into fractional shares from your basket.</p>
+        <div class="f-demo mono">coffee $4.27 → <b class="signal">+$0.73 into WIF</b></div>
+      </div>
+      <div class="f-card reveal d1">
+        <div class="f-ico">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="8" y="10" width="32" height="30" rx="4" opacity=".35"/><path d="M8 18h32M16 6v8M32 6v8"/><path d="M14 27h4M22 27h4M30 27h4M14 34h4M22 34h4" class="signal-stroke"/></svg>
+        </div>
+        <h3>Recurring DCA</h3>
+        <p>You set the amount. The agent picks the moment inside your window, and never skips a leg.</p>
+        <div class="f-demo mono">$50 / week → <b class="signal">agent picks the moment</b></div>
+      </div>
+      <div class="f-card reveal d2">
+        <div class="f-ico">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 14l10 12 8-6 12 16" opacity=".35"/><path d="M30 36h6v-6" opacity=".35"/><circle cx="36" cy="36" r="7" class="signal-stroke"/><path d="M36 32v4l3 2" class="signal-stroke"/></svg>
+        </div>
+        <h3>Buy-the-dip</h3>
+        <p>The agent buys drawdowns, and sizes each one by how deep it goes. Not a single rigid threshold.</p>
+        <div class="f-demo mono">deeper dip → <b class="signal">bigger buy</b></div>
+      </div>
+      <div class="f-card reveal d3">
+        <div class="f-ico">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="17" cy="17" r="9" opacity=".35"/><circle cx="33" cy="21" r="7" opacity=".35"/><circle cx="23" cy="33" r="8" class="signal-stroke"/></svg>
+        </div>
+        <h3>Themed baskets</h3>
+        <p>Mag7, dividend payers, AI. Ready-made sets, held at target weights and rebalanced for you.</p>
+        <div class="f-demo basket-logos">
+          <img src="assets/svg/apple.svg" alt="Apple"><img src="assets/svg/microsoft.svg" alt="Microsoft"><img src="assets/svg/nvidia.svg" alt="Nvidia"><img src="assets/svg/amazon.svg" alt="Amazon" class="inv"><img src="assets/svg/google.svg" alt="Google"><img src="assets/svg/meta.svg" alt="Meta"><img src="assets/svg/tesla.svg" alt="Tesla">
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- DCA calculator -->
+    <div class="calc reveal" id="calc">
+      <div class="calc-left">
+        <h3>Autopilot calculator</h3>
+        <p class="calc-note">A compound-interest model, not a return forecast.</p>
+        <label>Amount per week <output class="mono signal" id="outWeekly">$50</output></label>
+        <input type="range" id="inWeekly" min="10" max="500" step="10" value="50">
+        <label>Horizon <output class="mono signal" id="outYears">10 years</output></label>
+        <input type="range" id="inYears" min="1" max="30" step="1" value="10">
+        <label>Expected annual return <output class="mono signal" id="outRate">8%</output></label>
+        <input type="range" id="inRate" min="0" max="15" step="0.5" value="8">
+        <div class="calc-totals">
+          <div><span class="ct-l">Invested</span><span class="ct-v mono" id="ctIn">—</span></div>
+          <div><span class="ct-l">Portfolio</span><span class="ct-v mono signal" id="ctOut">—</span></div>
+          <div><span class="ct-l">Growth</span><span class="ct-v mono" id="ctGain">—</span></div>
+        </div>
+      </div>
+      <div class="calc-chart">
+        <svg id="calcChart" viewBox="0 0 560 300" preserveAspectRatio="none"></svg>
+        <div class="calc-legend">
+          <span><i class="lg lg1"></i>portfolio</span>
+          <span><i class="lg lg2"></i>invested</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE AGENT (setup → loop → guardrails → proof) ============ -->
+<section class="section" id="agents">
+  <div class="wrap">
+    <div class="kicker reveal">03 · The agent</div>
+    <h2 class="reveal">Three taps. Then it<br><span class="signal">runs without you</span></h2>
+    <p class="section-sub reveal">An execution agent, not a chatbot. It optimises <b>when</b> and <b>how much</b> to buy — never <b>whether</b> to leave your route.</p>
+
+    <div class="steps3 reveal">
+      <div class="st3">
+        <div class="st3-n">1</div>
+        <div class="st3-b">
+          <h4>Connect &amp; fund</h4>
+          <p>Deposit SOL into a vault only you can withdraw from.</p>
+        </div>
+      </div>
+      <div class="st3-arrow">→</div>
+      <div class="st3">
+        <div class="st3-n">2</div>
+        <div class="st3-b">
+          <h4>Set the route</h4>
+          <p>What to buy, how much per buy, the limits. One screen, four fields.</p>
+        </div>
+      </div>
+      <div class="st3-arrow">→</div>
+      <div class="st3">
+        <div class="st3-n">3</div>
+        <div class="st3-b">
+          <h4>Let it run</h4>
+          <p>Shares land in your wallet, not ours. Every buy is a signed transaction.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="section-sub reveal">Between your taps, it runs one loop — continuously.</p>
+
+    <div class="agent-grid">
+      <div class="ag-card reveal">
+        <div class="ag-ico">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8h24v32l-12-6-12 6V8Z" opacity=".4"/><path d="M18 18h12M18 26h8" class="signal-stroke"/></svg>
+        </div>
+        <h3>Route</h3>
+        <p>Goal, risk, assets, budget, limits. The frame the agent cannot step outside.</p>
+      </div>
+      <div class="ag-card reveal d1">
+        <div class="ag-ico">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 24s7-12 20-12 20 12 20 12-7 12-20 12S4 24 4 24Z" opacity=".4"/><circle cx="24" cy="24" r="6" class="signal-stroke"/></svg>
+        </div>
+        <h3>Observe</h3>
+        <p>Prices, volatility and drawdowns — plus your spending, for round-ups.</p>
+      </div>
+      <div class="ag-card reveal d2">
+        <div class="ag-ico">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6v10M24 32v10M6 24h10M32 24h10" opacity=".4"/><rect x="16" y="16" width="16" height="16" rx="5" class="signal-stroke"/></svg>
+        </div>
+        <h3>Decide</h3>
+        <p>The moment, the size and the priority of each buy. Every action logged and explained.</p>
+      </div>
+      <div class="ag-card reveal d3">
+        <div class="ag-ico">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 24h22l-6-6M30 24H8" opacity=".4"/><path d="M24 30l6-6" class="signal-stroke"/><rect x="32" y="14" width="10" height="20" rx="4" class="signal-stroke"/></svg>
+        </div>
+        <h3>Execute</h3>
+        <p>Routes through a DEX, settles from your vault. One buy, one waybot.</p>
+      </div>
+    </div>
+
+    <div class="ag-revoke reveal">
+      <div>
+        <div class="ag-revoke-h">Guardrails are in the contract, not in trust</div>
+        <p>Allow-listed assets only. A hard spend cap. <b>No transfers to external addresses.</b> A fully compromised agent still cannot move your money or buy something off the list — withdrawal keys never leave you.</p>
+      </div>
+      <div class="ag-revoke-btn">
+        <span class="ag-chip">no withdrawal rights</span>
+        <span class="ag-chip-sub mono">enforced on-chain</span>
+      </div>
+    </div>
+
+    <div class="marker-build reveal" id="markerBuild">
+      <div class="cb-stage">
+        <svg class="ring" id="progressRing" viewBox="0 0 240 240" aria-hidden="true"></svg>
+        <div class="ring-read">
+          <span class="ring-n mono" id="ringN">0</span>
+          <span class="ring-l">waybots cut</span>
+        </div>
+      </div>
+      <div class="cb-copy">
+        <h3>Every execution cuts a notch</h3>
+        <p>The mark is one notch. The ring is your route. Every buy the agent executes cuts a notch and advances it.</p>
+        <p>It only ever advances. <b>One notch, one signed transaction — the ring is the audit.</b></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ============ TOKEN ============ -->
+<section class="section" id="token">
+  <div class="wrap">
+    <div class="kicker reveal">04 · Token</div>
+    <h2 class="reveal"><span class="signal">$WAYBOT</span> — built for the user,<br>not the speculator</h2>
+    <div class="token-live reveal" id="tokenLive" hidden>
+      <div class="tl-head"><span class="pulse-dot"></span> $WAYBOT is live on Solana</div>
+      <div class="tl-row">
+        <span class="mono tl-addr" id="tlAddr">0x…</span>
+        <button class="btn btn-ghost btn-sm" id="tlCopy">Copy</button>
+        <a class="btn btn-ghost btn-sm" id="tlExplorer" href="#" target="_blank" rel="noopener">Explorer ↗</a>
+        <a class="btn btn-signal btn-sm" id="tlFlap" href="https://flap.sh/solana/coming soon on pump.fun" target="_blank" rel="noopener">Trade on Flap ↗</a>
+        <button class="btn btn-ghost btn-sm" id="tlWatch">Add to wallet</button>
+      </div>
+      <div class="tl-stats">
+        <div><span class="tl-v mono" id="tlSymbol">—</span><i>symbol <b class="live-tag">live</b></i></div>
+        <div><span class="tl-v mono" id="tlSupply">—</span><i>total supply <b class="live-tag">live</b></i></div>
+        <div><span class="tl-v mono" id="tlDecimals">—</span><i>decimals</i></div>
+      </div>
+    </div>
+
+    <!-- staking UI (activates when the staking contract is configured) -->
+    <div class="stake-panel reveal" id="stakePanel" hidden>
+      <div class="sp-head">
+        <span class="tl-head" style="margin:0"><span class="pulse-dot"></span> Stake — earn protocol fees in SOL</span>
+        <a class="btn btn-ghost btn-sm" id="spExplorer" href="#" target="_blank" rel="noopener">Contract ↗</a>
+      </div>
+      <div class="sp-stats">
+        <div><span class="tl-v mono" id="spTotal">—</span><i>total staked <b class="live-tag">live</b></i></div>
+        <div><span class="tl-v mono" id="spYourStake">—</span><i>your stake</i></div>
+        <div><span class="tl-v mono" id="spPending">—</span><i>your rewards</i></div>
+        <div><span class="tl-v mono" id="spWalletBal">—</span><i>in your wallet</i></div>
+      </div>
+      <div class="sp-wait" id="spWait" hidden>Stake token isn’t plugged in yet — activates the moment $WAYBOT launches.</div>
+      <div class="sp-controls" id="spControls" hidden>
+        <input class="sp-input mono" id="spAmount" type="text" inputmode="decimal" placeholder="amount">
+        <button class="btn btn-ghost btn-sm" id="spMax">Max</button>
+        <button class="btn btn-signal" id="spStake">Stake</button>
+        <button class="btn btn-ghost" id="spUnstake">Unstake</button>
+        <button class="btn btn-ghost" id="spClaim">Claim rewards</button>
+        <button class="btn btn-ghost btn-sm" id="spSkim" hidden title="Distribute fees sitting on the contract to all stakers">Distribute fees</button>
+      </div>
+      <div class="sp-note" id="spNote">Connect MetaMask to stake.</div>
+    </div>
+    <div class="token-grid">
+      <div class="t-card big reveal">
+        <div class="t-num mono">01</div>
+        <h3>Staking → 0% fees</h3>
+        <p>Stake, and the protocol takes nothing on the agent’s work.</p>
+      </div>
+      <div class="t-card reveal d1">
+        <div class="t-num mono">02</div>
+        <h3>Bonus on every auto-buy</h3>
+        <p>Pump.fun gave you one free stock. This one recurs.</p>
+      </div>
+      <div class="t-card reveal d2">
+        <div class="t-num mono">03</div>
+        <h3>Fee share in <img src="assets/svg/usdc.svg" class="inline-ico" alt="SOL">SOL</h3>
+        <p>Stakers earn a share of protocol fees in Global Dollar. Real yield, not emissions.</p>
+      </div>
+      <div class="t-card reveal d3">
+        <div class="t-num mono">04</div>
+        <h3>Earned by using the agent</h3>
+        <p>It accrues for running the agent. The entry bar is investing regularly, not holding capital.</p>
+      </div>
+      <div class="t-card reveal d4">
+        <div class="t-num mono">05</div>
+        <h3>Governance</h3>
+        <p>Holders vote on the strategy library and on new baskets.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY CHAIN ============ -->
+<section class="section" id="chain">
+  <div class="wrap">
+    <div class="kicker reveal">05 · Why Solana</div>
+    <h2 class="reveal">The chain where<br>memecoins never sleep</h2>
+    <div class="why-grid">
+      <div class="w-item reveal"><b>24/7 trading.</b> DCA and dip-buying run nights and weekends.</div>
+      <div class="w-item reveal d1"><b>Programmable RWAs.</b> Buying logic lives in contracts, not in a broker’s app.</div>
+      <div class="w-item reveal d2"><b>Composability.</b> A stock as collateral, in a basket, in a strategy.</div>
+      <div class="w-item reveal d3"><b>DeFi from day one.</b> Uniswap and 1inch are already deployed. Routing works today.</div>
+      <div class="w-item reveal d4"><b>The Pump.fun brand.</b> Lowers the trust barrier for retail.</div>
+      <div class="w-item warn reveal d5"><b>Limitation.</b> The chain is unavailable to US users. Waybot Agent targets the 120+ jurisdictions where it operates.</div>
+    </div></div>
+</section>
+
+<!-- ============ ARCHITECTURE ============ -->
+<section class="section" id="arch">
+  <div class="wrap">
+    <div class="kicker reveal">06 · Architecture</div>
+    <h2 class="reveal">Solana is an EVM L2 on the Arbitrum stack.<br>Contracts in Solidity</h2>
+    <div class="arch">
+      <div class="a-row">
+        <div class="a-box user reveal"><span class="a-tag">user</span>Mandate: goal · risk · assets · budget · limits</div>
+      </div>
+      <div class="a-connector reveal"><i></i></div>
+      <div class="a-row three">
+        <div class="a-box reveal"><span class="a-tag">offchain</span><b>Round-up Oracle</b>Computes spare change from spending and passes the trigger to the contract</div>
+        <div class="a-box core reveal d1"><span class="a-tag">core</span><b>Vault + Policy</b>Non-custodial. Allow-listed assets, spend cap, no external transfers — enforced in the contract</div>
+        <div class="a-box reveal d2"><span class="a-tag">automation</span><b>Keeper Network</b>Triggers DCA on schedule and dip-buys on condition</div>
+      </div>
+      <div class="a-connector reveal"><i></i></div>
+      <div class="a-row three">
+        <div class="a-box reveal"><span class="a-tag">execution</span><b>Swap Router</b>Uniswap V3/V4 + 1inch, buying Pump.fun memecoins</div>
+        <div class="a-box reveal d1"><span class="a-tag">token</span><b>$WAYBOT · StakingVault</b>ERC-20, staking, FeeDistributor → SOL</div>
+        <div class="a-box reveal d2"><span class="a-tag">agent</span><b>Agent Runtime</b>Off-chain: watches the market, picks moment and size, explains each action. No withdrawal rights</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-top">
+      <a class="brand" href="#top">
+        <img src="assets/logo.png" alt="Waybot Agent" class="brand-bolt">
+        <span class="brand-word">waybot</span>
+      </a>
+      <div class="foot-actions">
+        <a href="https://x.com/waybotagent" target="_blank" class="btn btn-ghost btn-connect btn-sm" rel="noopener">    
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+        </a>
+        <button class="btn btn-ghost btn-sm" id="footAddChain">Add Solana</button>
+        <a class="btn btn-ghost btn-sm" href="https://docs.solana.com/chain" target="_blank" rel="noopener">Docs: Solana ↗</a>
+        <a class="btn btn-ghost btn-sm" href="https://solanachain.blockscout.com" target="_blank" rel="noopener">Explorer ↗</a>
+        <a class="btn btn-ghost btn-sm" href="https://rabby.io" target="_blank" rel="noopener">Rabby Wallet ↗</a>
+      </div>
+    </div>
+    <p class="fine">Technical concept. Not investment advice. Waybot Agent is not affiliated with Solana Foundation or Solana. Tokenized memecoins are unavailable to US users.</p>
+    <p class="fine" style="color:var(--bone);font-family:var(--font-d)">Every step, marked.</p>
+    <p class="fine mono">$WAYBOT · Solana · chainId 101 · rpc.mainnet.chain.solana.com</p>
+    <p class="fine mono">CA <span class="foot-ca" id="footCa">coming soon on pump.fun</span> · <a class="foot-ca-link" href="https://flap.sh/solana/coming soon on pump.fun" target="_blank" rel="noopener">Flap ↗</a></p>
+  </div>
+</footer>
+</main>
+
+<div class="toasts" id="toasts"></div>
+
+<script src="js/app.js?v=1785212168"></script>
+<script src="js/fx.js?v=1785201223"></script>
+</body>
+</html>
