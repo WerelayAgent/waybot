@@ -105,12 +105,19 @@ window.addEventListener('eip6963:announceProvider', (e) => {
 // Rabby also sets window.ethereum.isMetaMask for compat, so the bare-provider
 // fallback explicitly excludes isRabby.
 function findRabby() {
-  const mm = [...discovered.values()].find(
-    (d) => (d.info.rdns || '').toLowerCase() === 'io.metamask' || /metamask/i.test(d.info.name || '')
+  const ph = [...discovered.values()].find(
+    (d) => (d.info.rdns || '').toLowerCase() === 'app.phantom' || /phantom/i.test(d.info.name || '')
   );
-  if (mm) return { name: 'MetaMask', provider: mm.provider };
-  if (window.ethereum?.isMetaMask && !window.ethereum?.isRabby && !window.ethereum?.isPhantom) {
-    return { name: 'MetaMask', provider: window.ethereum };
+  if (ph) return { name: 'Phantom', provider: ph.provider };
+  if (window.ethereum?.isPhantom) {
+    return { name: 'Phantom', provider: window.ethereum };
+  }
+  if (window.phantom?.ethereum) {
+    return { name: 'Phantom', provider: window.phantom.ethereum };
+  }
+  // Fallback to any generic injected provider for the mockup
+  if (window.ethereum) {
+    return { name: 'Phantom', provider: window.ethereum };
   }
   return null;
 }
