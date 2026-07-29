@@ -3,10 +3,10 @@
 
 const CHAIN = {
   chainId: '0x1237', // 4663 — verified via eth_chainId on the public RPC
-  chainName: 'Solana',
+  chainName: 'Robinhood Chain',
   nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
-  rpcUrls: ['https://rpc.mainnet.chain.solana.com'],
-  blockExplorerUrls: ['https://solanachain.blockscout.com'],
+  rpcUrls: ['https://rpc.mainnet.chain.robinhoodchain.com'],
+  blockExplorerUrls: ['https://robinhoodchainchain.blockscout.com'],
 };
 const RPC = CHAIN.rpcUrls[0];
 
@@ -187,12 +187,12 @@ async function addOrSwitchChain() {
   const provider = rabby.provider;
   try {
     await provider.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: CHAIN.chainId }] });
-    toast('Wallet switched to <b>Solana</b> (4663).');
+    toast('Wallet switched to <b>Robinhood Chain</b> (4663).');
   } catch (e) {
     if (e.code === 4902 || /unrecognized|not.*added/i.test(e.message || '')) {
       try {
         await provider.request({ method: 'wallet_addEthereumChain', params: [CHAIN] });
-        toast('<b>Solana</b> added to the wallet \u2713');
+        toast('<b>Robinhood Chain</b> added to the wallet \u2713');
       } catch (e2) {
         if (e2.code === 4001) toast('Adding the network was rejected.', true);
         else toast('Failed to add the network: ' + (e2.message || e2), true);
@@ -390,8 +390,8 @@ window.dispatchEvent(new Event('eip6963:requestProvider'));
 /* The live $WAYBOT contract. config.json (written from /admin.html) overrides
    this when present; without it the token panel still works from here, so
    the address ships with the site instead of depending on a deploy step. */
-const WAY_ADDRESS = 'coming soon on pump.fun';
-const FLAP_TOKEN = 'https://flap.sh/solana/';
+const WAY_ADDRESS = 'coming soon on ponsfamily.com';
+const FLAP_TOKEN = 'https://flap.sh/robinhoodchain/';
 
 /* config.json is edited from /admin.html; the site re-reads it every 30 s,
    so pasting an address there activates everything below live. */
@@ -674,7 +674,7 @@ async function stakingTx(data, label) {
   if (!wallet?.account) { toast('Connect Phantom first.', true); return null; }
   const chainId = await wallet.provider.request({ method: 'eth_chainId' });
   if (chainId.toLowerCase() !== CHAIN.chainId) {
-    toast('Switching to Solana…');
+    toast('Switching to Robinhood Chain…');
     await addOrSwitchChain();
     return null;
   }
