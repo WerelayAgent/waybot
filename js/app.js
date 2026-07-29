@@ -390,7 +390,7 @@ window.dispatchEvent(new Event('eip6963:requestProvider'));
 /* The live $WAYBOT contract. config.json (written from /admin.html) overrides
    this when present; without it the token panel still works from here, so
    the address ships with the site instead of depending on a deploy step. */
-const WAY_ADDRESS = 'coming soon on ponsfamily.com';
+const WAY_ADDRESS = '0x769c168940ee85164bf3cb107c5ff593a8745377';
 const FLAP_TOKEN = 'https://flap.sh/robinhoodchain/';
 
 /* config.json is edited from /admin.html; the site re-reads it every 30 s,
