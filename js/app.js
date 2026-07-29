@@ -106,18 +106,18 @@ window.addEventListener('eip6963:announceProvider', (e) => {
 // fallback explicitly excludes isRabby.
 function findRabby() {
   const ph = [...discovered.values()].find(
-    (d) => (d.info.rdns || '').toLowerCase() === 'app.phantom' || /phantom/i.test(d.info.name || '')
+    (d) => (d.info.rdns || '').toLowerCase() === 'io.metamask' || /metamask/i.test(d.info.name || '')
   );
-  if (ph) return { name: 'Phantom', provider: ph.provider };
-  if (window.ethereum?.isPhantom) {
-    return { name: 'Phantom', provider: window.ethereum };
+  if (ph) return { name: 'MetaMask', provider: ph.provider };
+  if (window.ethereum?.isMetaMask) {
+    return { name: 'MetaMask', provider: window.ethereum };
   }
-  if (window.phantom?.ethereum) {
-    return { name: 'Phantom', provider: window.phantom.ethereum };
+  if (window.ethereum) {
+    return { name: 'MetaMask', provider: window.ethereum };
   }
   // Fallback to any generic injected provider for the mockup
   if (window.ethereum) {
-    return { name: 'Phantom', provider: window.ethereum };
+    return { name: 'MetaMask', provider: window.ethereum };
   }
   return null;
 }
@@ -158,7 +158,7 @@ async function refreshWallet() {
 function disconnect(silent = false) {
   wallet = null;
   localStorage.removeItem('hf_rabby_connected');
-  $('connectLabel').textContent = 'Connect Phantom';
+  $('connectLabel').textContent = 'Connect MetaMask';
   const hc = $('heroConnect'), hd = $('heroDash');
   if (hc && hd) { hc.hidden = false; hd.hidden = true; }
   window.dispatchEvent(new Event('hf-wallet')); // let portfolio/console re-hide
@@ -665,13 +665,13 @@ async function refreshStaking() {
       $('spYourStake').textContent = '—';
       $('spPending').textContent = '—';
       $('spWalletBal').textContent = '—';
-      $('spNote').textContent = 'Connect Phantom to stake.';
+      $('spNote').textContent = 'Connect MetaMask to stake.';
     }
   } catch (e) { /* transient RPC hiccup — next poll retries */ }
 }
 
 async function stakingTx(data, label) {
-  if (!wallet?.account) { toast('Connect Phantom first.', true); return null; }
+  if (!wallet?.account) { toast('Connect MetaMask first.', true); return null; }
   const chainId = await wallet.provider.request({ method: 'eth_chainId' });
   if (chainId.toLowerCase() !== CHAIN.chainId) {
     toast('Switching to Robinhood Chain…');
